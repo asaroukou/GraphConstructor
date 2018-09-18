@@ -14,7 +14,7 @@ class Graph
         Graph(int n);
         void showVertex();
         int fRand(int fMin, int fMax);
-        Vertex* generateVertex(int n);
+        void generateVertex(int n);
     private:
 
 };

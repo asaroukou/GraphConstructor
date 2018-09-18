@@ -7,7 +7,8 @@ Graph::Graph(int n)
 {
     this->n = n;
     //this->listVertex = new Vertex[n];
-    this->listVertex = this->generateVertex(n);
+    Vertex *listVertex = new Vertex[n];
+    generateVertex(n);
 }
 
 int Graph::fRand(int fMin, int fMax)
@@ -16,14 +17,15 @@ int Graph::fRand(int fMin, int fMax)
     return 1.0;
 }
 
-Vertex* Graph::generateVertex(int n)
+void Graph::generateVertex(int n)
 {
-    Vertex *vertices[n];
+
     for(int i = 0; i<n; i++)
     {
-        vertices[i] = new Vertex(0, 0, 0);
+        Vertex *v = new Vertex();
+        listVertex[i] = *v;
     }
-    return *vertices;
+
 }
 
 void Graph::showVertex()
