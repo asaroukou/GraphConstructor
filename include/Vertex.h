@@ -9,7 +9,7 @@ class Vertex
         int y;
         int id;
 
-        Vertex(int x=0, int y=0, int id=-1);
+        Vertex(int x=0, int y=0, int id=0);
         void show();
         virtual ~Vertex();
 

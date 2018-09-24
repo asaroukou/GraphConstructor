@@ -13,7 +13,8 @@ int main()
     Edge *e1 = new Edge(src, dest, 15);
     e1->show();
 */
-    Graph *g1 = new Graph(5);
+    Graph *g1 = new Graph(15);
     g1->showVertex();
+
     return 0;
 }

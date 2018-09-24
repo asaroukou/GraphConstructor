@@ -1,28 +1,32 @@
 #include "../include/Graph.h"
-#include <random>
-#include <iostream>
+//#include <random>
 
+#include <iostream>
+#include <cstdlib>
 using namespace std;
 Graph::Graph(int n)
 {
     this->n = n;
     //this->listVertex = new Vertex[n];
-    Vertex *listVertex = new Vertex[n];
-    generateVertex(n);
+    //listVertex = new Vertex[n];
+    listVertex = (Vertex*)malloc(sizeof(Vertex) * n);
+    populateVertex(n);
 }
 
-int Graph::fRand(int fMin, int fMax)
+int Graph::getRand(int rMin, int rMax)
 {
-
-    return 1.0;
+    return rand() % 1000 ;//+ rMax;
 }
 
-void Graph::generateVertex(int n)
+void Graph::populateVertex(int n)
 {
 
     for(int i = 0; i<n; i++)
     {
-        Vertex *v = new Vertex();
+        int x = getRand(0, 100);
+        int y = getRand(0, 100);
+        //Vertex *v = new Vertex(fRand(0, 100), fRand(0, 100), i);
+        Vertex *v = new Vertex(x, y, i+1);
         listVertex[i] = *v;
     }
 

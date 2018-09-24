@@ -2,6 +2,9 @@
 #define GRAPH_H
 #include "Edge.h"
 #include "Vertex.h"
+
+
+
 using namespace std;
 
 class Graph
@@ -13,8 +16,8 @@ class Graph
         int     n;
         Graph(int n);
         void showVertex();
-        int fRand(int fMin, int fMax);
-        void generateVertex(int n);
+        int getRand(int rMin, int rMax);
+        void populateVertex(int n);
     private:
 
 };
