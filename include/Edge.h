@@ -13,6 +13,7 @@ class Edge
         void show();
         virtual ~Edge();
 
+
     protected:
 
     private:

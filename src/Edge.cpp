@@ -12,9 +12,9 @@ Edge::Edge(Vertex *src, Vertex *dest, double weight)
 
 void Edge::show()
 {
-    src->show();
+    src->showItem();
     cout << " --------" << weight << "----------> ";
-    dest->show();
+    dest->showItem();
     cout << endl;
 
 }

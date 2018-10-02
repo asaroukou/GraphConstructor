@@ -10,7 +10,10 @@ class Vertex
         int id;
 
         Vertex(int x=0, int y=0, int id=0);
-        void show();
+        void showItem();
+        void addItem();
+        void deleteItem();
+        void searchItem();
         virtual ~Vertex();
 
     protected:

@@ -13,7 +13,12 @@ int main()
     Edge *e1 = new Edge(src, dest, 15);
     e1->show();
 */
-    Graph *g1 = new Graph(15);
+    Graph *g1 = new Graph(4);
+    g1->showVertex();
+    Vertex *v = new Vertex();
+    Vertex *v2 = new Vertex();
+    g1->addItem(*v);
+    g1->addItem(*v2);
     g1->showVertex();
 
     return 0;

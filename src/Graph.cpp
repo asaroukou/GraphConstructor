@@ -1,15 +1,11 @@
 #include "../include/Graph.h"
-//#include <random>
+#include <vector>
 
 #include <iostream>
 #include <cstdlib>
 using namespace std;
 Graph::Graph(int n)
 {
-    this->n = n;
-    //this->listVertex = new Vertex[n];
-    //listVertex = new Vertex[n];
-    listVertex = (Vertex*)malloc(sizeof(Vertex) * n);
     populateVertex(n);
 }
 
@@ -20,23 +16,30 @@ int Graph::getRand(int rMin, int rMax)
 
 void Graph::populateVertex(int n)
 {
-
     for(int i = 0; i<n; i++)
     {
         int x = getRand(0, 100);
         int y = getRand(0, 100);
         //Vertex *v = new Vertex(fRand(0, 100), fRand(0, 100), i);
         Vertex *v = new Vertex(x, y, i+1);
-        listVertex[i] = *v;
+        this->listVertex.push_back(*v);
     }
-
 }
 
+void Graph::addItem(Vertex v)
+{
+    this->listVertex.push_back(v);
+}
+
+void Graph::addItem(Edge v)
+{
+
+}
 void Graph::showVertex()
 {
-    for(int i = 0; i < this->n ; i++)
+    for(int i = 0; i < this->listVertex.size() ; i++)
     {
-        this->listVertex[i].show();
+        this->listVertex[i].showItem();
         cout << endl;
     }
 
