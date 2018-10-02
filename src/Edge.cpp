@@ -3,7 +3,7 @@
 
 
 using namespace std;
-Edge::Edge(Vertex *src, Vertex *dest, double weight)
+Edge::Edge(Vertex src, Vertex dest, double weight)
 {
     this->src = src;
     this->dest = dest;
@@ -12,9 +12,9 @@ Edge::Edge(Vertex *src, Vertex *dest, double weight)
 
 void Edge::show()
 {
-    src->showItem();
+    src.showItem();
     cout << " --------" << weight << "----------> ";
-    dest->showItem();
+    dest.showItem();
     cout << endl;
 
 }

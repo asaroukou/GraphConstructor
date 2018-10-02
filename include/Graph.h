@@ -10,15 +10,18 @@ class Graph
 {
     public:
 
-        vector<Edge>    listEdge;
-        vector<Vertex>  listVertex;
+        vector<Edge>    edgesList;
+        vector<Vertex>  verticesList;
         vector<vector<int>> adjMatrix;
 
         Graph(int n);
 
-        void showVertex();
-        void addItem(Vertex v);
-        void addItem(Edge e);
+        void showVertices();
+        void showEdges();
+
+        void addVertex(Vertex v);
+        void addEdge(Vertex src, Vertex dest, double weight);
+        void addEdge(Edge e);
 
         int getRand(int rMin, int rMax);
         void populateVertex(int n);

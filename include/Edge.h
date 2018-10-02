@@ -5,11 +5,11 @@
 class Edge
 {
     public:
-        Vertex *src;
-        Vertex *dest;
+        Vertex src;
+        Vertex dest;
         double weight;
 
-        Edge(Vertex *src, Vertex *dest, double weight);
+        Edge(Vertex src, Vertex dest, double weight);
         void show();
         virtual ~Edge();
 
