@@ -6,7 +6,7 @@
 using namespace std;
 Graph::Graph(int n)
 {
-    populateVertex(n);
+    populateVertices(n);
 }
 
 int Graph::getRand(int rMin, int rMax)
@@ -14,7 +14,19 @@ int Graph::getRand(int rMin, int rMax)
     return rand() % 1000 ;//+ rMax;
 }
 
-void Graph::populateVertex(int n)
+void Graph::populateVertices(int n)
+{
+    for(int i = 0; i<n; i++)
+    {
+        int x = getRand(0, 100);
+        int y = getRand(0, 100);
+        //Vertex *v = new Vertex(fRand(0, 100), fRand(0, 100), i);
+        Vertex *v = new Vertex(x, y, i+1);
+        this->verticesList.push_back(*v);
+    }
+}
+
+void Graph::populateEdges(int n)
 {
     for(int i = 0; i<n; i++)
     {
@@ -49,6 +61,12 @@ void Graph::showVertices()
         this->verticesList[i].showItem();
         cout << endl;
     }
+}
+
+Vertex Graph::findVertex()
+{
+   // if(this->verticesList->)
+    return NULL;
 }
 
 void Graph::showEdges()

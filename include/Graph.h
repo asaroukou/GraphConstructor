@@ -24,7 +24,11 @@ class Graph
         void addEdge(Edge e);
 
         int getRand(int rMin, int rMax);
-        void populateVertex(int n);
+
+        void populateVertices(int n);
+        void populateEdges(int n);
+
+        Vertex findVertex();
     private:
 
 };

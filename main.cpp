@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 #include "include/Graph.h"
 #include "include/Vertex.h"
 
@@ -25,6 +26,9 @@ int main()
     g1->addEdge(g1->verticesList[2], g1->verticesList[3], 5.5);
     g1->addEdge(g1->verticesList[1], g1->verticesList[4], 0.5);
     g1->showEdges();
+
+    Vertex *i = find(g1->verticesList.begin(), g1->verticesList.end(), g1->verticesList[0]);
+    //cout <<
 
     return 0;
 }
