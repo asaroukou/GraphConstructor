@@ -3,7 +3,7 @@
 #include <vector>
 #include "Edge.h"
 #include "Vertex.h"
-
+#include <map>
 
 using namespace std;
 class Graph
@@ -13,11 +13,19 @@ class Graph
         vector<Edge>    edgesList;
         vector<Vertex>  verticesList;
         vector<vector<int>> adjMatrix;
+        map <string, bool> config{
+        {"IS_ORIENTED", true},
+        {"ALLOW_SELF_LOOP",  true},
+    };
+        int graphSize;
 
-        Graph(int n);
+        Graph(int n, map<string, bool> setup);
 
         void showVertices();
         void showEdges();
+        void showAdjMatrix();
+
+        int findVertexById(int id);
 
         void addVertex(Vertex v);
         void addEdge(Vertex src, Vertex dest, double weight);
@@ -25,10 +33,13 @@ class Graph
 
         int getRand(int rMin, int rMax);
 
-        void populateVertices(int n);
-        void populateEdges(int n);
+        void populateVertices();
+        void populateEdges();
+        void populateUGMatrix();
+        void populateDGMatrix(bool self_loop);
+        void matrixToEdgeList();
+        void file2graph();
 
-        Vertex findVertex();
     private:
 
 };

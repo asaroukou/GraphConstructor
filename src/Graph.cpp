@@ -2,41 +2,86 @@
 #include <vector>
 
 #include <iostream>
+#include <fstream>
 #include <cstdlib>
+
 using namespace std;
-Graph::Graph(int n)
+Graph::Graph(int n, map <string, bool> setup)
 {
-    populateVertices(n);
+    config = setup;
+    graphSize = n;
+    populateVertices();
+    //populateUGMatrix();
+    populateDGMatrix(true);
 }
+
 
 int Graph::getRand(int rMin, int rMax)
 {
     return rand() % 1000 ;//+ rMax;
 }
 
-void Graph::populateVertices(int n)
+void Graph::populateVertices()
 {
-    for(int i = 0; i<n; i++)
+    for(int i = 0; i<graphSize; i++)
     {
         int x = getRand(0, 100);
         int y = getRand(0, 100);
-        //Vertex *v = new Vertex(fRand(0, 100), fRand(0, 100), i);
         Vertex *v = new Vertex(x, y, i+1);
         this->verticesList.push_back(*v);
     }
 }
 
-void Graph::populateEdges(int n)
+void Graph::populateEdges()
 {
-    for(int i = 0; i<n; i++)
+    for(int i = 0; i<graphSize; i++)
     {
         int x = getRand(0, 100);
         int y = getRand(0, 100);
-        //Vertex *v = new Vertex(fRand(0, 100), fRand(0, 100), i);
         Vertex *v = new Vertex(x, y, i+1);
         this->verticesList.push_back(*v);
     }
 }
+
+void Graph::populateUGMatrix()
+{
+    for(int i = 0; i < graphSize; i++)
+    {
+        adjMatrix.push_back(vector<int>(graphSize));
+        for(int j = 0; j < graphSize; j++)
+        {
+            if(i > j){
+                adjMatrix[i][j] = adjMatrix[j][i];
+            } else if(i < j){
+                rand() % 2 == 0 ? adjMatrix[i][j] = 0 : adjMatrix[i][j] = 1;
+            }else {
+                adjMatrix[i][j] = 0;
+            }
+        }
+    }
+}
+
+void Graph::populateDGMatrix(bool self_loop)
+{
+    for(int i = 0; i < graphSize; i++)
+    {
+        adjMatrix.push_back(vector<int>(graphSize));
+        for(int j = 0; j < graphSize; j++)
+        {
+            if((i == j) && self_loop)
+                adjMatrix[i][j] = 1;
+            else
+                rand() % 2 == 0 ? adjMatrix[i][j] = 0 : adjMatrix[i][j] = 1;
+        }
+    }
+}
+
+void Graph::matrixToEdgeList()
+{
+
+}
+
+
 
 void Graph::addVertex(Vertex v)
 {
@@ -63,10 +108,25 @@ void Graph::showVertices()
     }
 }
 
-Vertex Graph::findVertex()
+void Graph::showAdjMatrix()
 {
-   // if(this->verticesList->)
-    return NULL;
+    cout << "Matrice d'adjacence : taille : " << adjMatrix.size() << endl;
+    for(int i = 0; i < adjMatrix.size(); i++)
+    {
+        for(int j = 0; j < adjMatrix[i].size(); j++)
+        {
+            cout << adjMatrix[i][j] << " ";
+        }
+    cout << endl;
+    }
+}
+
+int Graph::findVertexById(int id)
+{
+    for(int i = 0; i < verticesList.size(); i++)
+        if(verticesList[i].id == id)
+            return i;
+    return -1;
 }
 
 void Graph::showEdges()
@@ -76,4 +136,8 @@ void Graph::showEdges()
         this->edgesList[i].show();
         cout << endl;
     }
+}
+
+void Graph::file2graph(){
+
 }
