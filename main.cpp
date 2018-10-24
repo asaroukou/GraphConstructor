@@ -10,13 +10,13 @@ using namespace std;
 int main()
 {
 
-
+ Graph *g1 = new Graph("/home/users/ambyassa/g1.txt");
 /*
     Vertex *src = new Vertex(1, 10, 1);
     Vertex *dest = new Vertex(1, 2, 2);
     Edge *e1 = new Edge(src, dest, 15);
     e1->show();
-*/
+
 
     map <string, bool>SETUP{
         {"ORIENTED", true},
@@ -36,7 +36,7 @@ int main()
     g1->showEdges();
     cout << g1->findVertexById(2) << endl << g1->findVertexById(4) << endl << g1->findVertexById(8) <<endl;
     g1->showAdjMatrix();
-
+*/
 
     //Vertex *i = find(g1->verticesList.begin(), g1->verticesList.end(), g1->verticesList[0]);
     //cout <<

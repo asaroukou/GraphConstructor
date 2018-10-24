@@ -12,7 +12,7 @@ class Graph
 
         vector<Edge>    edgesList;
         vector<Vertex>  verticesList;
-        vector<vector<int>> adjMatrix;
+        vector<vector<float>> adjMatrix;
         map <string, bool> config{
         {"IS_ORIENTED", true},
         {"ALLOW_SELF_LOOP",  true},
@@ -20,6 +20,7 @@ class Graph
         int graphSize;
 
         Graph(int n, map<string, bool> setup);
+        Graph(string path);
 
         void showVertices();
         void showEdges();
@@ -38,7 +39,7 @@ class Graph
         void populateUGMatrix();
         void populateDGMatrix(bool self_loop);
         void matrixToEdgeList();
-        void file2graph();
+        void file2graph(string path);
 
     private:
 
