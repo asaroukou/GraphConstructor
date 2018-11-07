@@ -11,6 +11,13 @@ int main()
 {
 
  Graph *g1 = new Graph("/home/users/ambyassa/g1.txt");
+ g1->showAdjMatrix();
+ g1->populateVertices();
+ g1->showVertices();
+ g1->populateEdges();
+ g1->showEdges();
+ g1->matrixToList();
+ g1->showAdjList();
 /*
     Vertex *src = new Vertex(1, 10, 1);
     Vertex *dest = new Vertex(1, 2, 2);

@@ -11,8 +11,6 @@ Graph::Graph(int n, map <string, bool> setup)
     config = setup;
     graphSize = n;
     populateVertices();
-    //populateUGMatrix();
-    populateDGMatrix(true);
 }
 
 Graph::Graph(string path)
@@ -39,51 +37,37 @@ void Graph::populateVertices()
 
 void Graph::populateEdges()
 {
-    for(int i = 0; i<graphSize; i++)
+    if(this->representation == 'M')
     {
-        int x = getRand(0, 100);
-        int y = getRand(0, 100);
-        Vertex *v = new Vertex(x, y, i+1);
-        this->verticesList.push_back(*v);
-    }
-}
-
-void Graph::populateUGMatrix()
-{
-    for(int i = 0; i < graphSize; i++)
-    {
-        adjMatrix.push_back(vector<float>(graphSize));
-        for(int j = 0; j < graphSize; j++)
+        for(int i = 0; i<adjMatrix.size(); i++)
         {
-            if(i > j){
-                adjMatrix[i][j] = adjMatrix[j][i];
-            } else if(i < j){
-                rand() % 2 == 0 ? adjMatrix[i][j] = 0 : adjMatrix[i][j] = 1;
-            }else {
-                adjMatrix[i][j] = 0;
+            for(int j = 0; j<adjMatrix[i].size(); j++)
+            {
+                if(adjMatrix[i][j] != 0)
+                {
+                    Edge *e = new Edge(verticesList[i], verticesList[j], adjMatrix[i][j]);
+                    edgesList.push_back(*e);
+                }
             }
         }
     }
 }
 
-void Graph::populateDGMatrix(bool self_loop)
+
+void Graph::matrixToList()
 {
-    for(int i = 0; i < graphSize; i++)
+
+    for(int i = 0; i<adjMatrix.size(); i++)
     {
-        adjMatrix.push_back(vector<float>(graphSize));
-        for(int j = 0; j < graphSize; j++)
+        adjList.push_back(vector<int>(graphSize));
+        for(int j = 0; j<adjMatrix[i].size(); j++)
         {
-            if((i == j) && self_loop)
-                adjMatrix[i][j] = 1;
-            else
-                rand() % 2 == 0 ? adjMatrix[i][j] = 0 : adjMatrix[i][j] = 1;
+            if(adjMatrix[i][j] != 0)
+            {
+                adjList[i][j] = j+1;
+            }
         }
     }
-}
-
-void Graph::matrixToEdgeList()
-{
-
 }
 
 
@@ -106,6 +90,7 @@ void Graph::addEdge(Vertex src, Vertex dest, double weight)
 
 void Graph::showVertices()
 {
+    cout << endl << "Liste des vertex"<< endl;
     for(int i = 0; i < this->verticesList.size() ; i++)
     {
         this->verticesList[i].showItem();
@@ -115,12 +100,26 @@ void Graph::showVertices()
 
 void Graph::showAdjMatrix()
 {
-    cout << "Matrice d'adjacence : taille : " << adjMatrix.size() << endl;
+    cout << endl << "Matrice d'adjacence : taille : " << adjMatrix.size() << endl;
     for(int i = 0; i < adjMatrix.size(); i++)
     {
         for(int j = 0; j < adjMatrix[i].size(); j++)
         {
             cout << adjMatrix[i][j] << " ";
+        }
+    cout << endl;
+    }
+}
+
+void Graph::showAdjList()
+{
+    cout << endl << "Liste d'adjacence"<< endl;
+    for(int i = 0; i < adjList.size(); i++)
+    {
+        cout << i+1 << " : ";
+        for(int j = 0; j < adjList[i].size(); j++)
+        {
+            cout << adjList[i][j] << "-";
         }
     cout << endl;
     }
@@ -136,6 +135,7 @@ int Graph::findVertexById(int id)
 
 void Graph::showEdges()
 {
+    cout << endl << "Liste des edges"<< endl;
     for(int i = 0; i < this->edgesList.size() ; i++)
     {
         this->edgesList[i].show();
@@ -147,8 +147,7 @@ void Graph::file2graph(string path){
     ifstream fichier(path, ios::in);  // on ouvre le fichier en lecture
     if(fichier)  // si l'ouverture a réussi
     {
-        char type;
-        char representation;
+
         string ligne;
         int ln = 0;
         int i = 0;
@@ -157,17 +156,17 @@ void Graph::file2graph(string path){
             if(ln == 1)
                 this->graphSize = stoi(ligne);
             else if(ln == 2)
-                type = ligne[0];
+                this->type = ligne[0];
             else if(ln == 3)
-                representation = ligne[0];
+                this->representation = ligne[0];
             else
             {
-                if(representation == 'M')
+                if(this->representation == 'M')
                 {
                     vector<string> results;
                     boost::split(results, ligne, [](char c){return c == ',';});
                     adjMatrix.push_back(vector<float>(graphSize));
-                    for(int j = 0; j < adjMatrix.size(); j++){
+                    for(int j = 0; j < adjMatrix[i].size(); j++){
                         adjMatrix[i][j] = stof(results[j]);
                     }
                     i++;
@@ -176,11 +175,8 @@ void Graph::file2graph(string path){
             }
 
 
-
-
         }
-        fichier.close();
-        this->showAdjMatrix(); // on ferme le fichier
+        fichier.close(); // on ferme le fichier
     }
     else  // sinon
         cerr << "Impossible d'ouvrir le fichier !" << endl;

@@ -13,7 +13,7 @@ Edge::Edge(Vertex src, Vertex dest, double weight)
 void Edge::show()
 {
     src.showItem();
-    cout << " --------" << weight << "----------> ";
+    cout << "---" << weight << "-->";
     dest.showItem();
     cout << endl;
 

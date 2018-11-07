@@ -11,6 +11,7 @@ class Vertex
 
         Vertex(int x=0, int y=0, int id=0);
         void showItem();
+        void showItemDetail();
         void addItem();
         void deleteItem();
         void searchItem();

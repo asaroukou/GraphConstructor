@@ -13,11 +13,14 @@ class Graph
         vector<Edge>    edgesList;
         vector<Vertex>  verticesList;
         vector<vector<float>> adjMatrix;
+        vector<vector<int>> adjList;
         map <string, bool> config{
         {"IS_ORIENTED", true},
         {"ALLOW_SELF_LOOP",  true},
     };
         int graphSize;
+        char type;
+        char representation;
 
         Graph(int n, map<string, bool> setup);
         Graph(string path);
@@ -25,6 +28,7 @@ class Graph
         void showVertices();
         void showEdges();
         void showAdjMatrix();
+        void showAdjList();
 
         int findVertexById(int id);
 
@@ -36,9 +40,7 @@ class Graph
 
         void populateVertices();
         void populateEdges();
-        void populateUGMatrix();
-        void populateDGMatrix(bool self_loop);
-        void matrixToEdgeList();
+        void matrixToList();
         void file2graph(string path);
 
     private:

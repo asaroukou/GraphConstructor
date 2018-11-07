@@ -10,9 +10,14 @@ Vertex::Vertex(int x, int y, int id)
     this->id = id;
 }
 
-void Vertex::showItem()
+void Vertex::showItemDetail()
 {
     cout  << id << " : " << "("<< x << ", " << y << ")";
+}
+
+void Vertex::showItem()
+{
+    cout  << "["<< id << "]";
 }
 
 Vertex::~Vertex()
